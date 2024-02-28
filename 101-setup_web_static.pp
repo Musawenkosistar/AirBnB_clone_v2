@@ -2,19 +2,20 @@
 
 # Nginx configuration file
 $nginx_conf = "server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    add_header X-Served-By ${hostname};
-    root   /var/www/html;
-    index  index.html index.htm;
+        listen 80 default_server;
+        location /hbnb_static { alias /data/web_static/current/;}
+        error_page 404 /404.html;
+        location = /404.html {
+                root /var/www/html;
+                internal;
+        }
+        listen [::]:80 default_server;
 
-    location /hbnb_static {
-        alias /data/web_static/current;
-        index index.html index.htm;
+        add_header X-Served-By 232782-web-02;
     }
 
     location /redirect_me {
-        return 301 http://cuberule.com/;
+        rewrite ^/redirect_me https://github.com/Musawenkosistar permanent;
     }
 
     error_page 404 /404.html;
