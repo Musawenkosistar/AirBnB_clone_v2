@@ -3,14 +3,16 @@
 # Nginx configuration file
 $nginx_conf = "server {
         listen 80 default_server;
-        location /hbnb_static { alias /data/web_static/current/;}
+        location 34.227.91.54/hbnb_static { alias /data/web_static/current/;}
+        location 3.86.7.45/hbnb_static { alias /data/web_static/current/;}
         error_page 404 /404.html;
         location = /404.html {
                 root /var/www/html;
                 internal;
         }
         listen [::]:80 default_server;
-
+        
+        add_header X-Served-By 232782-web-01;
         add_header X-Served-By 232782-web-02;
     }
 
